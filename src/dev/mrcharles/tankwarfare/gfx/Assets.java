@@ -18,7 +18,7 @@ public class Assets {
 	public static BufferedImage[] shell_explode;
 	public static void init() {
 		spritesheet sheet = new spritesheet(ImageLoader.loadImage("/textures/spritesheetA.png"));
-		spritesheet shell_sheet = new spritesheet(ImageLoader.loadImage("/textures/explosionSheet1.png"));
+		spritesheet shell_sheet = new spritesheet(ImageLoader.loadImage("/textures/explosionSheet2png.png"));
 		//common widths and heights
 		soldier_width_dead = 90;
 		soldier_height_dead = 90;
