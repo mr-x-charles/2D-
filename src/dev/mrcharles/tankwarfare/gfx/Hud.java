@@ -12,10 +12,17 @@ public class Hud {
 		this.handler = handler;
 	}
 
-	public void render(Graphics g, int reloadClock, int shellX, int shellY, int playerX, int playerY) {
+	public void render(Graphics g, int reloadClock, int shellX, int shellY, int playerX, int playerY, boolean firing, int[] lifetimes) {
 		g.drawString("Reload Time: " + reloadClock, 10, 15);
 		g.drawString("SHELL X: " + shellX + ", Y: " + shellY, 10, 25);
 		g.drawString("PLAYER X: " + playerX + ", Y: " + playerY, 10, 35);
+		g.drawString("Am I firing?: " + firing, 10, 45);
+		int i = 0;
+		if(lifetimes != null) {
+			for(int life : lifetimes) {
+				g.drawString("Shell: " + i + ", LifeTime: " + life, 10, 55 + i * 10);
+			}
+		}
 	}
 
 }

@@ -44,7 +44,7 @@ public class GameState extends State {
 		world.render(g);
 		level.render(g);
 		ReloadClock = player.getReloadClock();
-		hud.render(g, ReloadClock, (int) shell.getX(), (int) shell.getY(), (int) player.getX(), (int) player.getY());
+		hud.render(g, ReloadClock, (int) shell.getX(), (int) shell.getY(), (int) player.getX(), (int) player.getY(), player.isFiring(), player.getLifetimes());
 		player.render(g);
 	}
 	
