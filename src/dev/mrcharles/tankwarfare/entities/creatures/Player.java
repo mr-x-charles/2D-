@@ -36,14 +36,6 @@ public class Player extends Creature {
 	public Player(Handler handler, float x, float y, TankShell shell) {
 		super(handler, x, y, 112, 197);
 		shells = new ArrayList<TankShell>();
-		for(int i = 0; i < this.ammo; i++) {
-			shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
-				Assets.tank_shell.getHeight(), (float) 9));
-		}
-		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
-				Assets.tank_shell.getHeight(), (float) 9));
-		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
-				Assets.tank_shell.getHeight(), (float) 9));
 		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
 				Assets.tank_shell.getHeight(), (float) 9));
 		bounds.x = 16;
@@ -100,6 +92,19 @@ public class Player extends Creature {
 				firing = true;
 				if(shells.get(0) != null) {
 					TankShell shell = shells.get(0);
+					this.ammo--;
+					shell.setVector(TurretAngle + FrameAngle,
+							(x - handler.getGameCamera().getxOffset()) + 30, 
+							(y - handler.getGameCamera().getyOffset()) + 200,
+							(x - handler.getGameCamera().getxOffset()) + Assets.tank_gun_a.getWidth()/2 + 15, 
+							(y - handler.getGameCamera().getyOffset()) + Assets.tank_gun_a.getHeight()/2);
+					shell.setWaiting(true);
+				}
+				else if(ammo>0) {
+					TankShell shell = (new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
+							Assets.tank_shell.getHeight(), (float) 9));
+					this.ammo--;
+					shells.add(0, shell);
 					shell.setVector(TurretAngle + FrameAngle,
 							(x - handler.getGameCamera().getxOffset()) + 30, 
 							(y - handler.getGameCamera().getyOffset()) + 200,
