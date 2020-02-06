@@ -30,12 +30,22 @@ public class Player extends Creature {
 	private boolean turning;
 	private ArrayList<TankShell> shells;
 	private int shellToRemove = -5;
+	private int ammo = 10;
 	
 
 	public Player(Handler handler, float x, float y, TankShell shell) {
 		super(handler, x, y, 112, 197);
 		shells = new ArrayList<TankShell>();
-		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), Assets.tank_shell.getHeight(), (float) 0.33333));
+		for(int i = 0; i < this.ammo; i++) {
+			shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
+				Assets.tank_shell.getHeight(), (float) 9));
+		}
+		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
+				Assets.tank_shell.getHeight(), (float) 9));
+		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
+				Assets.tank_shell.getHeight(), (float) 9));
+		shells.add(new TankShell(handler, x, y, Assets.tank_shell.getWidth(), 
+				Assets.tank_shell.getHeight(), (float) 9));
 		bounds.x = 16;
 		bounds.y = 32;
 		bounds.width = 32;
@@ -47,6 +57,7 @@ public class Player extends Creature {
 		shell.setX(x - handler.getGameCamera().getxOffset() + 50);
 		shell.setY(y - handler.getGameCamera().getyOffset() - 100);
 		shell.setWaiting(false);
+		reloadClock = 501;
 	}
 
 	public void tick() {	
@@ -89,7 +100,9 @@ public class Player extends Creature {
 				firing = true;
 				if(shells.get(0) != null) {
 					TankShell shell = shells.get(0);
-					shell.setVector(x, y, 
+					shell.setVector(TurretAngle + FrameAngle,
+							(x - handler.getGameCamera().getxOffset()) + 30, 
+							(y - handler.getGameCamera().getyOffset()) + 200,
 							(x - handler.getGameCamera().getxOffset()) + Assets.tank_gun_a.getWidth()/2 + 15, 
 							(y - handler.getGameCamera().getyOffset()) + Assets.tank_gun_a.getHeight()/2);
 					shell.setWaiting(true);
