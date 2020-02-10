@@ -94,10 +94,10 @@ public class Player extends Creature {
 					TankShell shell = shells.get(0);
 					this.ammo--;
 					shell.setVector(TurretAngle + FrameAngle,
-							(x - handler.getGameCamera().getxOffset()) + 30, 
-							(y - handler.getGameCamera().getyOffset()) + 200,
-							(x - handler.getGameCamera().getxOffset()) + Assets.tank_gun_a.getWidth()/2 + 15, 
-							(y - handler.getGameCamera().getyOffset()) + Assets.tank_gun_a.getHeight()/2);
+							(x + 30), 
+							(y + 200),
+							(x + Assets.tank_gun_a.getWidth()/2 + 15), 
+							(y + Assets.tank_gun_a.getHeight()/2));
 					shell.setWaiting(true);
 				}
 				else if(ammo>0) {
@@ -106,16 +106,24 @@ public class Player extends Creature {
 					this.ammo--;
 					shells.add(0, shell);
 					shell.setVector(TurretAngle + FrameAngle,
-							(x - handler.getGameCamera().getxOffset()) + 30, 
-							(y - handler.getGameCamera().getyOffset()) + 200,
-							(x - handler.getGameCamera().getxOffset()) + Assets.tank_gun_a.getWidth()/2 + 15, 
-							(y - handler.getGameCamera().getyOffset()) + Assets.tank_gun_a.getHeight()/2);
+							(x + 30), 
+							(y + 200),
+							(x + Assets.tank_gun_a.getWidth()/2 + 15), 
+							(y + Assets.tank_gun_a.getHeight()/2));
 					shell.setWaiting(true);
 				}
 			}
 		}
 	}
 	
+	public int getAmmo() {
+		return ammo;
+	}
+
+	public void setAmmo(int ammo) {
+		this.ammo = ammo;
+	}
+
 	private void getInput() {
 		xMove = 0;
 		yMove = 0;
@@ -175,9 +183,13 @@ public class Player extends Creature {
 				(int) (y - handler.getGameCamera().getyOffset()) + Assets.tank_gun_a.getHeight()/2, 
 				(int) (x - handler.getGameCamera().getxOffset()) + 61, 
 				(int) (y - handler.getGameCamera().getyOffset()) + 200);
-		g2d.setTransform(oldXForm);
+		if(reloadClock > 1 && reloadClock < 3 && shells.get(0) != null) {
+			TankShell shell = shells.get(0);
+			shell.setTransform(g2d.getTransform());
+		}
 		if(reloadClock > 1 && reloadClock < 500 && shells.get(0) != null) {
 			TankShell shell = shells.get(0);
+			g2d.setTransform(oldXForm);
 			shell.render(g2d);
 		}
 // For debugging of bounding boxes for collision uncomment the below lines	

@@ -12,8 +12,9 @@ public class Hud {
 		this.handler = handler;
 	}
 
-	public void render(Graphics g, int reloadClock, int shellX, int shellY, int playerX, int playerY, boolean firing, int[] lifetimes) {
+	public void render(Graphics g, int reloadClock, int shellX, int shellY, int playerX, int playerY, boolean firing, int[] lifetimes, int tank_ammo) {
 		g.drawString("Reload Time: " + reloadClock, 10, 15);
+		g.drawString("No. Shells: " + tank_ammo, 200, 15);
 		g.drawString("SHELL X: " + shellX + ", Y: " + shellY, 10, 25);
 		g.drawString("PLAYER X: " + playerX + ", Y: " + playerY, 10, 35);
 		g.drawString("Am I firing?: " + firing, 10, 45);

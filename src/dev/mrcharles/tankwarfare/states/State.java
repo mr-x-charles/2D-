@@ -1,9 +1,11 @@
 package dev.mrcharles.tankwarfare.states;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import dev.mrcharles.tankwarfare.Game;
 import dev.mrcharles.tankwarfare.Handler;
+import dev.mrcharles.tankwarfare.entities.Entity;
 
 public abstract class State {
 	
@@ -23,6 +25,7 @@ public abstract class State {
 	public abstract void tick();
 	
 	public abstract void render(Graphics g);
+	public abstract ArrayList<Entity> getEntities();
 	
 	
 	

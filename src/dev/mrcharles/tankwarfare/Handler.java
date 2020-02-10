@@ -1,5 +1,7 @@
 package dev.mrcharles.tankwarfare;
 
+import dev.mrcharles.tankwarfare.entities.Entity;
+import dev.mrcharles.tankwarfare.entities.Wall_Breakable;
 import dev.mrcharles.tankwarfare.gfx.GameCamera;
 import dev.mrcharles.tankwarfare.input.KeyManager;
 import dev.mrcharles.tankwarfare.worlds.World;
@@ -44,6 +46,18 @@ public class Handler {
 	
 	public void setWorld(World world) {
 		this.world = world;
+	}
+
+	public boolean checkCollision(Entity entity) {
+		for(Entity e : game.getEntities()) {
+			if(e.getX() - entity.getX() > 0 && e.getX() - entity.getX() < 20) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
 	}
 
 }

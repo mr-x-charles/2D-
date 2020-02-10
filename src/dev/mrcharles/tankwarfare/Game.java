@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import dev.mrcharles.tankwarfare.display.Display;
+import dev.mrcharles.tankwarfare.entities.Entity;
 import dev.mrcharles.tankwarfare.gfx.Assets;
 import dev.mrcharles.tankwarfare.gfx.GameCamera;
 import dev.mrcharles.tankwarfare.gfx.ImageLoader;
@@ -42,6 +44,7 @@ public class Game implements Runnable{
 	//Handler
 	
 	private Handler handler;
+	private ArrayList<Entity> entities;
 	
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -61,6 +64,7 @@ public class Game implements Runnable{
 		menuState = new MenuState(handler);
 		settingsState = new SettingsState(handler);
 		State.setState(gameState);
+		this.entities = gameState.getEntities();
 	}
 	private void tick() {
 		keyManager.tick();
@@ -157,5 +161,8 @@ public class Game implements Runnable{
 			e.printStackTrace();
 		}
 		
+	}
+	public ArrayList<Entity> getEntities() {
+		return this.entities;
 	}
 }
