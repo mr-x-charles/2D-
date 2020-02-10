@@ -71,6 +71,12 @@ public class TankShell extends Projectiles {
 		
 	}
 
+	@Override
+	public void collide() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

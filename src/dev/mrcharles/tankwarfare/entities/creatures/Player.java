@@ -227,4 +227,10 @@ public class Player extends Creature {
 			return null;
 		}
 	}
+
+	@Override
+	public void collide() {
+		// TODO Auto-generated method stub
+		
+	}
 }

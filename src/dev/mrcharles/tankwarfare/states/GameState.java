@@ -25,6 +25,7 @@ public class GameState extends State {
 	private int ReloadClock;
 	private TankShell shell;
 	private ArrayList<Entity> entities;
+	private Wall_Breakable wall;
 	
 	
 	public GameState(Handler handler) {
@@ -34,7 +35,7 @@ public class GameState extends State {
 		handler.setWorld(world);
 		hud = new Hud(handler);
 		shell = new TankShell(handler, 1, 1, 1, 1, 1);
-		Wall_Breakable wall = new Wall_Breakable(handler, 300, 300);
+		wall = new Wall_Breakable(handler, 300, 300);
 		player = new Player(handler, 100,100, shell);
 		level = new Level(handler, "res/worlds/level1.txt");
 		entities.add(player);
@@ -43,17 +44,48 @@ public class GameState extends State {
 	}
 
 	public void tick() {
-		world.tick();
-		player.tick();
-		
+		for(Entity e : entities) {
+			e.tick();
+		}
+		checkCollisions();
+	}
+
+	private void checkCollisions() {
+		for(int i = 0; i < entities.size() -1; i++) {
+			for(int j = entities.size() -1; j > 0; j--) {
+				if(Math.abs(entities.get(i).getX() - entities.get(j).getY() )
+							< 
+							entities.get(i).getWidth() + entities.get(j).getWidth()
+						&&
+						Math.abs(entities.get(i).getY() - entities.get(j).getY()) 
+								<
+								entities.get(i).getHeight() + entities.get(j).getHeight()) {
+					entities.get(i).collide();
+					entities.get(j).collide();
+					
+				}
+			}
+		}
 		
 	}
 
 	public void render(Graphics g) {
 		world.render(g);
 		level.render(g);
+		wall.render(g);
 		ReloadClock = player.getReloadClock();
-		hud.render(g, ReloadClock, (int) shell.getX(), (int) shell.getY(), (int) player.getX(), (int) player.getY(), player.isFiring(), player.getLifetimes(), player.getAmmo());
+		hud.render(g, 
+				ReloadClock, 
+				(int) shell.getX(), 
+				(int) shell.getY(), 
+				(int) player.getX(), 
+				(int) player.getY(), 
+				player.isFiring(), 
+				player.getLifetimes(), 
+				player.getAmmo(),
+				(int) wall.getX(),
+				(int) wall.getY()
+				);
 		player.render(g);
 	}
 

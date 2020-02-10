@@ -16,6 +16,7 @@ public class Assets {
 	private static int soldier_width_alive;
 	private static int soldier_height_alive;
 	public static BufferedImage[] shell_explode;
+	public static BufferedImage wall_destructible;
 	public static void init() {
 		spritesheet sheet = new spritesheet(ImageLoader.loadImage("/textures/spritesheetA.png"));
 		spritesheet shell_sheet = new spritesheet(ImageLoader.loadImage("/textures/explosionSheet2png.png"));
@@ -50,6 +51,7 @@ public class Assets {
 			}
 		}
 		//the assets
+		wall_destructible = sheet.crop(1254, 54, 150, 50);
 		grass = sheet.crop(1213, 466, 160, 160);
 		tree_grass = sheet.crop(126, 797, 160, 160);
 		wall_brick = sheet.crop(713, 325, 160, 160);
